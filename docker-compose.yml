@@ -1,0 +1,9 @@
+version: "3"
+services:
+ liuliget:
+  build: .
+  image: my_liuliget
+  restart: always
+  ports:
+    - "8001:8080"
+  container_name: my_liuliget
