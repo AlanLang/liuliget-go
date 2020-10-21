@@ -1,9 +1,16 @@
 kind: pipeline
-type: docker
-name: default
-   
+name: cicd
+
 steps:
-- name: test
-  image: alpine
-  commands:
-  - echo hello
+  - name: test
+    image: docker/compose
+    volumes:
+      - name: docker_socket
+        path: /var/run/docker.sock
+    commands:
+      - docker-compose up -d --build
+
+volumes:
+  - name: docker_socket
+    host:
+      path: /var/run/docker.sock
