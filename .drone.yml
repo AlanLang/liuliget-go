@@ -2,7 +2,7 @@ kind: pipeline
 name: cicd
 
 steps:
-  - name: test
+  - name: build
     image: docker/compose
     volumes:
       - name: docker_socket

@@ -1,9 +1,14 @@
-version: "3"
+version: "3.4"
 services:
  liuliget:
   build: .
   image: my_liuliget
   restart: always
+  tty: true
+  stdin_open: true
+  deploy:
+    update_config:
+      order: start-first
   ports:
     - "8001:8080"
   container_name: my_liuliget
