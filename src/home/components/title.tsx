@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Drawer, Button, Row, Col, Input } from 'antd';
+import { Drawer, Button, Row, Col } from 'antd';
+import { AiraInput } from './airaInput';
 
 export const Title = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [aira2Url, setAira2Url] = useState(localStorage.getItem('aira2Url') || '');
+    const [aira2Config, setAira2Config] = useState({
+        type: 'http',
+        url: window.location.hostname,
+        port: '8006',
+        path: '',
+        token: ''
+    });
 
     const onClose = () => {
         setDrawerVisible(false)
@@ -55,10 +63,7 @@ export const Title = () => {
         >
             <Row gutter={16}>
                 <Col span={24}>
-                    <Label>Aira2下载地址</Label>
-                    <Input placeholder="请填写Aira2下载地址" defaultValue={aira2Url} onChange={(e) => {
-                            setAira2Url(e.target.value)
-                    }} />
+                    <AiraInput {...aira2Config}></AiraInput>
                 </Col>
             </Row>
         </Drawer>
