@@ -11,7 +11,7 @@ export const Title = () => {
         type: 'http',
         url: window.location.hostname,
         port: '8006',
-        path: '',
+        path: 'jsonrpc',
         token: ''
     });
 
@@ -41,7 +41,7 @@ export const Title = () => {
         </TitleContent>
         <Drawer 
             title="偏好设置" 
-            width={document.body.clientWidth < 500 ? '100%' : '50%'}
+            width={document.body.clientWidth < 500 ? '100%' : '70%'}
             visible={drawerVisible}
             bodyStyle={{ paddingBottom: 80 }}
             maskClosable={true}
