@@ -21,7 +21,7 @@ export const Title = () => {
 
     const onSave = () => {
         setLoading(true);
-        localStorage.setItem("aira2Url", JSON.stringify(aira2Config));
+        localStorage.setItem(AIRA_CONFIG, JSON.stringify(aira2Config));
         setLoading(false);
         onClose();
     }
