@@ -12,12 +12,14 @@ export function getDownloadUrl(url: string): Promise <string> {
     });
 }
 
-export function downloadMagnet(url: string, downloadUrl: string){
+export function downloadMagnet(url: string, downloadUrl: string, token = ''){
+    const params = [[downloadUrl], {}];
+    token && params.unshift([`token:${token}`])
     return http.post(url, {
         id: new Date().getTime(),
         jsonrpc: '2.0',
         method: 'aria2.addUri',
-        params: [[downloadUrl], {}]
+        params,
     })
 }
 

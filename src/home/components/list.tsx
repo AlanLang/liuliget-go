@@ -4,6 +4,8 @@ import copy from 'copy-to-clipboard';
 import React from 'react';
 import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { AIRA_CONFIG } from './title';
+import { AiraConfig } from './airaInput';
 
 const getUrl = (link: string): Promise<string> => {
     const loading = message.loading('正在获取下载链接');
@@ -18,8 +20,7 @@ const ListItem = (prop: {
     data: PageData;
 }) => {
     const {title, description, img, moreLink, type} = prop.data;
-    const aira2Url = localStorage.getItem('aira2Url') || '';
-
+    const airaConfig = JSON.parse(localStorage.getItem(AIRA_CONFIG) || '') as AiraConfig;
     const copyUrl = () => {
         getUrl(moreLink).then(downUrl => {
             if (copy(downUrl)) {
@@ -33,7 +34,7 @@ const ListItem = (prop: {
     const download = () => {
         getUrl(moreLink).then(downUrl => {
             if (downUrl) {
-                downloadMagnet(aira2Url, downUrl).then(() => {
+                downloadMagnet(`${airaConfig.type}://${airaConfig.url}:${airaConfig.port}/${airaConfig.path}`, downUrl, airaConfig.token).then(() => {
                     message.success('已成功提交到下载');
                 })
             } else {
@@ -51,7 +52,7 @@ const ListItem = (prop: {
                     type.map(item => <div key={item} className='type'>{item}</div>)
                 }
                 <div onClick={copyUrl}><CopyOutlined />拷贝</div>
-                { aira2Url ? <div onClick={download}><DownloadOutlined />下载</div> : null}
+                <div onClick={download}><DownloadOutlined />下载</div>
             </ListActions>
         </ListItemContent>
         <ListImageContent >

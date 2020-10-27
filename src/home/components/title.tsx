@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Drawer, Button, Row, Col } from 'antd';
-import { AiraInput } from './airaInput';
+import { AiraConfig, AiraInput } from './airaInput';
+export const AIRA_CONFIG = "airaConfig";
 
 export const Title = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [aira2Url, setAira2Url] = useState(localStorage.getItem('aira2Url') || '');
-    const [aira2Config, setAira2Config] = useState({
+    const [aira2Config, setAira2Config] = useState<AiraConfig>({
         type: 'http',
         url: window.location.hostname,
         port: '8006',
@@ -21,13 +21,14 @@ export const Title = () => {
 
     const onSave = () => {
         setLoading(true);
-        localStorage.setItem("aira2Url", aira2Url);
+        localStorage.setItem("aira2Url", JSON.stringify(aira2Config));
         setLoading(false);
         onClose();
     }
 
     useEffect(() => {
-        setAira2Url(localStorage.getItem('aira2Url') || '');
+        const config = localStorage.getItem(AIRA_CONFIG);
+        config && setAira2Config(JSON.parse(config) as AiraConfig);
     }, []);
 
 
@@ -63,7 +64,9 @@ export const Title = () => {
         >
             <Row gutter={16}>
                 <Col span={24}>
-                    <AiraInput {...aira2Config}></AiraInput>
+                    <AiraInput value={aira2Config} onChange={(config) => {
+                        setAira2Config(config)
+                    }}></AiraInput>
                 </Col>
             </Row>
         </Drawer>
