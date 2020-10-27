@@ -20,7 +20,6 @@ const ListItem = (prop: {
     data: PageData;
 }) => {
     const {title, description, img, moreLink, type} = prop.data;
-    const airaConfig = JSON.parse(localStorage.getItem(AIRA_CONFIG) || '') as AiraConfig;
     const copyUrl = () => {
         getUrl(moreLink).then(downUrl => {
             if (copy(downUrl)) {
@@ -34,6 +33,7 @@ const ListItem = (prop: {
     const download = () => {
         getUrl(moreLink).then(downUrl => {
             if (downUrl) {
+                const airaConfig = JSON.parse(localStorage.getItem(AIRA_CONFIG) || '') as AiraConfig;
                 downloadMagnet(`${airaConfig.type}://${airaConfig.url}:${airaConfig.port}/${airaConfig.path}`, downUrl, airaConfig.token).then(() => {
                     message.success('已成功提交到下载');
                 })
@@ -53,6 +53,7 @@ const ListItem = (prop: {
                 }
                 <div onClick={copyUrl}><CopyOutlined />拷贝</div>
                 <div onClick={download}><DownloadOutlined />下载</div>
+                { localStorage.getItem(AIRA_CONFIG) ? <div onClick={download}><DownloadOutlined />下载</div> : null}
             </ListActions>
         </ListItemContent>
         <ListImageContent >
