@@ -14,7 +14,7 @@ export function getDownloadUrl(url: string): Promise <string> {
 
 export function downloadMagnet(url: string, downloadUrl: string, token = ''){
     const params = [[downloadUrl], {}];
-    token && params.unshift([`token:${token}`])
+    token && params.unshift(`token:${token}`)
     return http.post(url, {
         id: new Date().getTime(),
         jsonrpc: '2.0',

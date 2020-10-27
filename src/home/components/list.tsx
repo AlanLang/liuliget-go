@@ -52,7 +52,6 @@ const ListItem = (prop: {
                     type.map(item => <div key={item} className='type'>{item}</div>)
                 }
                 <div onClick={copyUrl}><CopyOutlined />拷贝</div>
-                <div onClick={download}><DownloadOutlined />下载</div>
                 { localStorage.getItem(AIRA_CONFIG) ? <div onClick={download}><DownloadOutlined />下载</div> : null}
             </ListActions>
         </ListItemContent>
