@@ -13,6 +13,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
+	"github.com/unrolled/secure"
 )
 
 // LiuliList 琉璃神社数据列表
@@ -48,6 +49,24 @@ type ErrMessage struct {
 type SucessData struct {
 	Status int    `json:"status"`
 	Data   string `json:"data"`
+}
+
+// TLSHandler TLSHandler
+func TLSHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		secureMiddleware := secure.New(secure.Options{
+			SSLRedirect: true,
+			SSLHost:     "localhost:8080",
+		})
+		err := secureMiddleware.Process(c.Writer, c.Request)
+
+		// If there was an error, do not continue.
+		if err != nil {
+			return
+		}
+
+		c.Next()
+	}
 }
 
 // Recover 异常获取
@@ -97,6 +116,7 @@ func main() {
 	r := gin.Default()
 
 	r.Use(Recover)
+	r.Use(TLSHandler())
 
 	r.LoadHTMLGlob("build/index.html")
 	r.Static("/static/", "./build/static/")
@@ -252,5 +272,7 @@ func main() {
 		})
 	})
 
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.RunTLS(":8080", "cert.pem", "key.pem")
+
+	//r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
