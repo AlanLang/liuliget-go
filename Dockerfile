@@ -1,10 +1,10 @@
 # Build go
 FROM golang:1.15 AS serverBuilder
-ARG PLUGIN_HOST="localhost"
+ARG HOST_NAME="localhost"
 COPY . /liuliget
 WORKDIR /liuliget
-RUN echo $PLUGIN_HOST
-RUN go run /usr/local/go/src/crypto/tls/generate_cert.go --host=$PLUGIN_HOST
+RUN echo $HOST_NAME
+RUN go run /usr/local/go/src/crypto/tls/generate_cert.go --host=$HOST_NAME
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o liuliget
 
 # Build web

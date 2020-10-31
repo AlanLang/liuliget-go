@@ -8,11 +8,10 @@ steps:
       - name: docker_socket
         path: /var/run/docker.sock
     environment:
-      PLUGIN_HOST:
-        from_secret: PLUGIN_HOST
+      HOST_NAME:
+        from_secret: hostname
     commands:
-      - echo $PLUGIN_HOST
-      - PLUGIN_HOST=$PLUGIN_HOST docker-compose up -d --build
+      - docker-compose up -d --build
 
 volumes:
   - name: docker_socket

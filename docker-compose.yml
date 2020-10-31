@@ -4,7 +4,7 @@ services:
   build:
     context: .
     args:
-      PLUGIN_HOST: $PLUGIN_HOST
+      HOST_NAME: $HOST_NAME
   image: my_liuliget
   restart: always
   tty: true
