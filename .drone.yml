@@ -4,6 +4,7 @@ name: cicd
 steps:
   - name: build
     image: docker/compose
+    secrets: [ PLUGIN_HOST ]
     volumes:
       - name: docker_socket
         path: /var/run/docker.sock
