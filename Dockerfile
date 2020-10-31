@@ -1,6 +1,5 @@
 # Build go
 FROM golang:1.15 AS serverBuilder
-ARG PLUGIN_HOST="localhost"
 COPY . /liuliget
 WORKDIR /liuliget
 RUN echo $PLUGIN_HOST

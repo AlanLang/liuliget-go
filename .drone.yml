@@ -11,7 +11,7 @@ steps:
       PLUGIN_HOST:
         from_secret: PLUGIN_HOST
     commands:
-      - PLUGIN_HOST=${PLUGIN_HOST} docker-compose up -d --build
+      - docker-compose up -d --build
 
 volumes:
   - name: docker_socket
