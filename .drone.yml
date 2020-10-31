@@ -11,6 +11,7 @@ steps:
       HOST_NAME:
         from_secret: hostname
     commands:
+      - echo $HOST_NAME
       - docker-compose up -d --build
 
 volumes:
