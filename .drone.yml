@@ -7,9 +7,9 @@ steps:
     volumes:
       - name: docker_socket
         path: /var/run/docker.sock
-    secrets: 
-      - source: PLUGIN_HOST
-        target: PLUGIN_HOST
+    environment:
+      PLUGIN_HOST:
+        from_secret: PLUGIN_HOST
     commands:
       - docker-compose up -d --build
 
