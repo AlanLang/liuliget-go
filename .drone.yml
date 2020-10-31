@@ -4,7 +4,6 @@ name: cicd
 steps:
   - name: build
     image: docker/compose
-    secrets: [ PLUGIN_HOST ]
     volumes:
       - name: docker_socket
         path: /var/run/docker.sock
@@ -12,7 +11,8 @@ steps:
       PLUGIN_HOST:
         from_secret: PLUGIN_HOST
     commands:
-      - docker-compose up -d --build
+      - echo $PLUGIN_HOST
+      - PLUGIN_HOST=$PLUGIN_HOST docker-compose up -d --build
 
 volumes:
   - name: docker_socket
