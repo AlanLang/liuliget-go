@@ -3,8 +3,6 @@ services:
  liuliget:
   build:
     context: .
-    args:
-      HOST_NAME: $HOST_NAME
   image: my_liuliget
   restart: always
   tty: true

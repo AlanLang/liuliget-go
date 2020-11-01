@@ -7,11 +7,7 @@ steps:
     volumes:
       - name: docker_socket
         path: /var/run/docker.sock
-    environment:
-      HOST_NAME:
-        from_secret: hostname
     commands:
-      - echo $HOST_NAME
       - docker-compose up -d --build
 
 volumes:
