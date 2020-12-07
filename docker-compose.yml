@@ -10,5 +10,5 @@ services:
     update_config:
       order: start-first
   ports:
-    - "8001:8080"
+    - "8001:80"
   container_name: my_liuliget

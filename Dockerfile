@@ -16,6 +16,6 @@ FROM scratch
 COPY --from=webBuilder /app/build build
 COPY --from=serverBuilder /liuliget/liuliget .
 
-EXPOSE 8080
+EXPOSE 80
 # 这里跟编译完的文件名一致
 ENTRYPOINT  ["./liuliget"]
