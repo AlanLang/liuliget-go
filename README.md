@@ -1,4 +1,7 @@
 # 琉璃神社爬虫
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 ![](./screenshot/demo.png)
 
@@ -45,7 +48,7 @@ docker build -t liuliget .
 ```
 运行容器
 ```
-docker run -itd --name liuliget --restart=always -p 8101:8080 liuliget
+docker run -itd --name liuliget --restart=always -p 8101:80 liuliget
 ```
 
 或者使用docker-compose
