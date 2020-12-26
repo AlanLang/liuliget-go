@@ -4,7 +4,7 @@
 
 ## 直接使用
 ```
-docker pull langwenda/liuliget-go:latest
+docker pull alanlang/liuliget-go:latest
 ```
 
 ## 下载运行
